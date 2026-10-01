@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "frondori-kitchen"
+version = "0.1.0"
+description = "kitchen-v0: a cooperative two-chef kitchen (Overcooked-like) for Frondori — a PettingZoo environment."
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "frondori-engine>=0.4",
+    "numpy>=1.24",
+    "gymnasium>=1.0",
+    "pettingzoo>=1.24",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=7"]
+
+# C'est cette déclaration qui rend l'environnement visible : une fois le
+# paquet installé, `frondori_engine.make("kitchen-v0")` fonctionne, et un
+# serveur Frondori qui l'a dans son Python le propose en compétition.
+[project.entry-points."frondori.environments"]
+"kitchen-v0" = "frondori_kitchen:KitchenEnv"
+
+[tool.setuptools]
+packages = ["frondori_kitchen"]
