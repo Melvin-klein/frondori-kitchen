@@ -30,6 +30,10 @@ dependencies = [
     "pettingzoo>=1.24",
 ]
 
+[project.urls]
+Source = "https://github.com/Melvin-klein/frondori-kitchen"
+Issues = "https://github.com/Melvin-klein/frondori-kitchen/issues"
+
 [project.optional-dependencies]
 dev = ["pytest>=7"]
 
