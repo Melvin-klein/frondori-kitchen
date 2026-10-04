@@ -31,6 +31,24 @@ défaut) : `layout`, `onions_needed` (2), `cook_time` (5), `max_steps` (200).
 Règles, observations et actions : docstring de `frondori_kitchen.env`, et en
 anglais sur le site (Documentation > Environments).
 
+## Entraîner un agent
+
+Avec le SDK (`pip install "frondori-sdk[train]"`), en une ligne :
+
+```python
+from frondori import Agent
+from frondori.agents import PPO
+
+agent = PPO()
+Agent(environment="kitchen-v0", local=True).train(agent, total_timesteps=2_000_000)
+```
+
+La récompense (+1 par soupe servie) est trop rare pour un agent qui débute :
+sans aide, il n'apprend rien. Façonnée par potentiel dans un wrapper
+Gymnasium (`PPO(wrap_env=...)`, exemple complet dans la documentation du site,
+Train Locally > Shaping the reward), PPO sert 11 soupes par match après 2
+millions de pas, environ 8 minutes sur CPU.
+
 ## Développer / tester
 
 ```bash
