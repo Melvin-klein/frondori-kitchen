@@ -111,5 +111,5 @@ def test_invalid_action_is_rejected():
     env = frondori_engine.make("kitchen-v0")
     env.reset()
 
-    with pytest.raises(ValueError, match="entre 0 et 5"):
+    with pytest.raises(ValueError, match="from 0 to 5"):
         env.step({"chef_0": 9, "chef_1": STAY})

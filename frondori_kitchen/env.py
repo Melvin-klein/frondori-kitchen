@@ -148,19 +148,19 @@ class KitchenEnv(ParallelEnv):
         max_steps: int = 200,
     ):
         if render_mode is not None and render_mode not in self.metadata["render_modes"]:
-            raise ValueError(f"render_mode {render_mode!r} non supporté ; disponibles : {self.metadata['render_modes']}")
+            raise ValueError(f"render_mode {render_mode!r} is not supported; available: {self.metadata['render_modes']}")
         self.render_mode = render_mode
         self._layout = tuple(layout)
         self._rows, self._cols = len(self._layout), len(self._layout[0])
         if any(len(row) != self._cols for row in self._layout):
-            raise ValueError("plan invalide : toutes les lignes doivent avoir la même longueur")
+            raise ValueError("invalid layout: all rows must have the same length")
 
         cells = [(r, c) for r in range(self._rows) for c in range(self._cols)]
         self._spawns = []
         for marker in ("1", "2"):
             found = [cell for cell in cells if self._tile(cell) == marker]
             if len(found) != 1:
-                raise ValueError(f"plan invalide : il faut exactement une case {marker!r}")
+                raise ValueError(f"invalid layout: exactly one {marker!r} cell is needed")
             self._spawns.append(found[0])
         self._pot_cells = [cell for cell in cells if self._tile(cell) == "P"]
         self._counter_cells = [cell for cell in cells if self._tile(cell) == "X"]
@@ -209,7 +209,7 @@ class KitchenEnv(ParallelEnv):
         chosen = [int(actions[agent]) for agent in self.possible_agents]
         for action in chosen:
             if not 0 <= action < 6:
-                raise ValueError(f"action {action} invalide : attendu un entier entre 0 et 5")
+                raise ValueError(f"invalid action {action}: expected an integer from 0 to 5")
 
         self._move(chosen)
         # Interactions dans l'ordre des agents : si les deux visent la même
