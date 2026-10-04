@@ -11,7 +11,7 @@ physique, Python pur.
 pip install frondori-kitchen      # installe aussi frondori-engine
 ```
 
-(Pas encore publié sur PyPI : depuis un clone, `pip install -e ../frondori-engine -e .`.)
+Pour développer, depuis un clone : `pip install -e ".[dev]"`.
 
 ## Utilisation
 
